@@ -40,5 +40,44 @@
             flex-direction: column;
             padding: 5px;
         }
+
+        .icons{
+            display: flex;
+            margin-bottom: 10px;
+
+            .icon{
+                border: 2px solid white;
+                padding: 5px;
+                border-radius: 50%;
+                margin-right: 10px;
+                font-style: 16px;
+            }
+        }
+
+        .itemInfoTop{
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-style: 14px;
+            font-weight: 600;
+            color: gray;
+
+
+            .limit{
+                border: 1px solid grey;
+                padding: 1px 3px;
+                margin: 0 10px;
+            }
+        }
+
+        .desc{
+            font-style: 13px;
+            margin-bottom: 10px;
+        }
+
+        .genre{
+            font-style: 14px;
+            color: lightgray;
+        }
     }
 }
