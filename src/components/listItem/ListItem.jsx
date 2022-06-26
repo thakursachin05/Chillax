@@ -27,21 +27,19 @@ export default function ListItem({index}) {
         <video src={trailer} autoPlay={true} loop />
         <div className="itemInfo">
         <div className="icons">
-          <PlayArrow />
-          <Add />
-          <ThumbUpAltOutlined />
-          <ThumbDownOutlined />
+          <PlayArrow className="icon"/>
+          <Add className="icon"/>
+          <ThumbUpAltOutlined className="icon"/>
+          <ThumbDownOutlined className="icon"/>
         </div>
         <div className="itemInfoTop">
           <span>1 hour 14min</span>
           <span className="limit">+16</span>
           <span>1999</span>
         </div>
-        <div className="desx">
+        <div className="desc">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-          assumenda quasi, error consectetur a impedit delectus nisi alias
-          ducimus tempore eum mollitia. Inventore similique deleniti sed
-          obcaecati porro labore incidunt?
+          assumenda quasi
         </div>
 
         <div className="genre">Action</div>
