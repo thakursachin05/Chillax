@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Movie = require("../models/User");
+const Movie = require("../models/Movie");
 const verify = require("../verifyToken");
 
 // Create
@@ -52,7 +52,7 @@ router.delete("/:id", verify, async (req, res) => {
 });
 // Get
 
-router.get("/find", verify, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
  
     try {
       const movie = await Movie.findById(req.params.id);
@@ -64,7 +64,7 @@ router.get("/find", verify, async (req, res) => {
 });
 // Get Random
 
-router.get("/random", verify, async (req, res) => {
+router.get("/random", async (req, res) => {
     const type = req.query.type;
     let movie;
     try {
@@ -86,5 +86,19 @@ router.get("/random", verify, async (req, res) => {
     }
   
 });
+
+// Get all
+router.get("/", verify, async (req, res) => {
+    if (req.user.isAdmin) {
+      try {
+        const movies = await Movie.find();
+        res.status(200).json(movies.reverse());
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(403).json("You are not allowed!");
+    }
+  });
 
 module.exports = router;
