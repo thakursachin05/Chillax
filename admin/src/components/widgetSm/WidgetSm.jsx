@@ -28,7 +28,7 @@ export default function WidgetSm() {
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
-        {newUsers.map((user) => {
+        {newUsers.map((user) => (
           <li className="widgetSmListItem">
             <img
               src={
@@ -45,8 +45,8 @@ export default function WidgetSm() {
               <Visibility className="widgetSmIcon" />
               Display
             </button>
-          </li>;
-        })}
+          </li>
+        ))}
       </ul>
     </div>
   );
