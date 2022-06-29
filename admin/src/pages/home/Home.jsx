@@ -1,7 +1,7 @@
 import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
-import { userData } from "../../dummyData";
+// import { userData } from "../../dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useMemo, useState } from "react";
@@ -41,17 +41,19 @@ export default function Home() {
             return a._id - b._id;
         })
         statsList.map((item) => {
+         
           setUserStats((prev) => [
             ...prev,
             { name: MONTHS[item._id - 1], "New User": item.total },
           ]);
+          return 1;
         });
       } catch (err) {
         console.log(err);
       }
     };
     getStats();
-  }, []);
+  }, [MONTHS]);
   
   return (
     <div className="home">
