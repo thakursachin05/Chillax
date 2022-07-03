@@ -1,6 +1,6 @@
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
-import "./app.css";
+import "./App.css";
 import Home from "./pages/home/Home";
 import {
   BrowserRouter as Router,
@@ -53,7 +53,7 @@ function App() {
               <Route path="/newMovie">
                 <NewMovie />
               </Route>
-              <Route path="/lists">
+              {/* <Route path="/lists">
                 <ListList />
               </Route>
               <Route path="/list/:listId">
@@ -61,7 +61,7 @@ function App() {
               </Route>
               <Route path="/newlist">
                 <NewList />
-              </Route>
+              </Route> */}
             </div>
           </>
         )}
