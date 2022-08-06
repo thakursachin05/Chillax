@@ -4,8 +4,17 @@ import { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import "./register.scss";
 import logo from "../../images/logo.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -23,14 +32,21 @@ export default function Register() {
     setPassword(passwordRef.current.value);
     setUsername(usernameRef.current.value);
     try {
-      await axios.post("auth/register", { email,username, password });
-      history.push("/login");
+      const { data } = await axios.post("http://localhost:8800/api/auth/register", { email,username, password });
+      if(data.status === false){
+        toast.error(data.msg, toastOptions);
+      }
+      if(data.status === true){
+
+        history.push("/login");
+      }
     } catch (err) {}
   };
   // const handleClick = async () => {
     
   // };
   return (
+    <>
     <div className="register">
       <div className="top">
         <div className="wrapper">
@@ -66,5 +82,7 @@ export default function Register() {
         )}
       </div>
     </div>
+    <ToastContainer />
+    </>
   );
 }
