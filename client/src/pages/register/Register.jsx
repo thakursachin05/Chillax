@@ -25,6 +25,7 @@ export default function Register() {
   const usernameRef = useRef();
 
   const handleStart = () => {
+    console.log("srejks")
     setEmail(emailRef.current.value);
   };
   const handleFinish = async (e) => {
@@ -42,9 +43,11 @@ export default function Register() {
       }
     } catch (err) {}
   };
-  // const handleClick = async () => {
-    
-  // };
+  const handleClick = () => {
+    console.log("first")
+    history.push("/login");
+
+  };
   return (
     <>
     <div className="register">
@@ -55,7 +58,7 @@ export default function Register() {
             src={logo}
             alt=""
           />
-          <button className="loginButton">Sign In</button>
+          <button className="loginButton" onClick={handleClick}>Sign In</button> 
         </div>
       </div>
       <div className="container">
