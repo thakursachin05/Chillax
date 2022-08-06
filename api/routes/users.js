@@ -22,12 +22,12 @@ router.put("/:id", verify, async (req, res) => {
         },
         { new: true }
       );
-      res.status(200).json(updatedUser);
+      return res.status(200).json(updatedUser);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   } else {
-    res.status(403).json("You can update only your account!");
+    return res.status(403).json("You can update only your account!");
   }
 });
 // Delete
@@ -39,12 +39,12 @@ router.delete("/:id", verify , async (req, res) => {
   
       try {
         await User.findByIdAndDelete(req.params.id)
-        res.status(200).json("User has been deleted");
+        return res.status(200).json("User has been deleted");
       } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       }
     } else {
-      res.status(403).json("You can delete only your account!");
+      return res.status(403).json("You can delete only your account!");
     }
   });
 // Get
@@ -54,9 +54,9 @@ router.get("/find/:id", async (req, res) => {
       try {
         const user = await User.findById(req.params.id)
         const { password, ...info } = user._doc;
-        res.status(200).json(info);
+        return res.status(200).json(info);
       } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       }
     } 
   );
