@@ -5,7 +5,6 @@ import "./featured.scss";
 
 export default function Featured({ type, setGenre }) {
   const [content, setContent] = useState({});
-
   useEffect(() => {
     const getRandomContent = async () => {
       try {
@@ -24,6 +23,11 @@ export default function Featured({ type, setGenre }) {
   }, [type]);
 
   console.log(content);
+
+  const handlePlayBtn = () => {
+    window.location.href = content.trailer;
+  }
+
   return (
     <div className="featured">
       {type && (
@@ -54,11 +58,11 @@ export default function Featured({ type, setGenre }) {
       <img src={content.img} alt="" />
       <div className="info">
         <img src={content.imgTitle} alt="" />
-        <span className="desc">{content.desc}</span>
+        <span className="desc">{(content.desc)}</span>
         <div className="buttons">
-          <button className="play">
+          <button className="play" onClick={handlePlayBtn}>
             <PlayArrow />
-            <span>Play</span>
+            <span> Play </span>
           </button>
           <button className="more">
             <InfoOutlined />
