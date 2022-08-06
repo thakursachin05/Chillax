@@ -41,7 +41,8 @@ export default function ListItem({ index, item }) {
         <img src={movie?.imgSm} alt="" />
         {isHovered && (
           <>
-            <video src={movie.trailer} autoPlay={true} loop />
+            {/* <video src={movie.trailer} autoPlay={true} loop /> */}
+            <a href={movie.trailer}></a>
             <div className="itemInfo">
               <div className="icons">
                 <PlayArrow className="icon" />
