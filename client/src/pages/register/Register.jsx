@@ -25,7 +25,6 @@ export default function Register() {
   const usernameRef = useRef();
 
   const handleStart = () => {
-    console.log("srejks")
     setEmail(emailRef.current.value);
   };
   const handleFinish = async (e) => {
@@ -44,9 +43,7 @@ export default function Register() {
     } catch (err) {}
   };
   const handleClick = () => {
-    console.log("first")
     history.push("/login");
-
   };
   return (
     <>
