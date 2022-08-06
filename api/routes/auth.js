@@ -5,6 +5,17 @@ const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
+  const { username, email } = req.body;
+  const usernameCheck = await User.findOne({ username });
+  if (usernameCheck)
+    return res.json({ msg: "Username already used", status: false });
+  const emailCheck = await User.findOne({ email });
+  if (emailCheck) return res.json({ msg: "Email already used", status: false });
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(!email.match(mailformat)){
+    return res.json({msg : "Invalid Email" , status : false});
+  }
+
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -15,9 +26,10 @@ router.post("/register", async (req, res) => {
   });
   try {
     const user = await newUser.save();
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(500).json(err);
+    return res.json({status : true, user});
+  } 
+  catch (err) {
+    return res.json({status : false , msg : err});
   }
 });
 
@@ -25,13 +37,18 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Wrong password or username!");
+    if (!user) {
+      res.status(401).json({msg : "Wrong password or username!", check : false});
+      return;
+    }
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
-    originalPassword !== req.body.password &&
-      res.status(401).json("Wrong password or username!");
+    if (originalPassword !== req.body.password) {
+      res.status(401).json({msg : "Wrong password or username!" , check : false});
+      return;
+    }
 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
@@ -41,9 +58,9 @@ router.post("/login", async (req, res) => {
 
     const { password, ...info } = user._doc;
 
-    res.status(200).json({ ...info, accessToken });
+    return res.status(200).json({ ...info, accessToken , check : true});
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json({msg : err, check : false});
   }
 });
 
