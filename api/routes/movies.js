@@ -88,17 +88,17 @@ router.get("/random", async (req, res) => {
 });
 
 // Get all
-router.get("/", verify, async (req, res) => {
-    if (req.user.isAdmin) {
+router.get("/", async (req, res) => {
+    // if (req.user.isAdmin) {
       try {
         const movies = await Movie.find();
         return res.status(200).json(movies.reverse());
       } catch (err) {
         return res.status(500).json(err);
       }
-    } else {
-      return res.status(403).json("You are not allowed!");
-    }
+    // } else {
+      // return res.status(403).json("You are not allowed!");
+    // }
   });
 
 module.exports = router;
