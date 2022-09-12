@@ -35,7 +35,7 @@ router.delete("/:id", verify, async (req, res) => {
 
 //GET
 
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   const typeQuery = req.query.type;
   const genreQuery = req.query.genre;
   let list = [];
